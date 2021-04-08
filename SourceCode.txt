@@ -1,0 +1,41 @@
+#InformationTheory Assignment-2
+fr=open('abc.txt','r', encoding='UTF-8')
+
+#Firstly to read all the lines
+content=fr.readlines()
+contentLines=''
+
+
+characers=[]#Which means the total number of different symbols to store
+rate={}#Which means stores the frequency of each unique symbols
+
+
+for line in content:
+   
+    line=line.strip()
+    
+    if len(line)==0:
+        continue
+    contentLines = contentLines + line
+    #Then to calculate each letter frequency
+    for x in range(0,len(line)):       
+    
+        if not line[x] in characers:       
+            characers.append(line[x])     
+       
+        if line[x] not in rate:           
+            rate[line[x]]=1
+              
+        rate[line[x]]+=1
+        
+
+
+rate=sorted(rate.items(), key=lambda e:e[1], reverse=True)
+
+
+print('Total exists%dsymbols'%len(contentLines))
+print('Total exists%dunique symbols'%len(characers))
+print()
+for i in rate:
+    print("[",i[0],"] with the probability ",  i[1]/len(contentLines), "appeared")
+fr.close()
